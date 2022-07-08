@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header id="header" class="header">
+      <h1 class="animate__animated-animate__bounce">
+        Masters Copenhagen Stat Checker
+      </h1>
+      <img
+        class="masters-logo"
+        src="https://static.wikia.nocookie.net/logopedia/images/1/16/Vct-masters-logo.png"
+      />
+      <form id="get-player-form">
+        <input
+          type="text"
+          placeholder="search for player"
+          id="get-player-input"
+          name="player-search"
+        />
+        <button type="submit" id="get-player-search">search</button>
+      </form>
+    </header>
+    <section id="icon-holder" class="icon-holder">
+      <div id="icons" class="icons">
+        <div id="duelist" class="duelist">
+          <img
+            id="raze"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/raze.png"
+            alt="Raze"
+          />
+          <img
+            id="jett"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/jett.png"
+            alt="Jett"
+          />
+          <img
+            id="neon"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/neon.png"
+            alt="Neon"
+          />
+          <img
+            id="yoru"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/yoru.png"
+            alt="Yoru"
+          />
+          <img
+            id="reyna"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/reyna.png"
+            alt="Reyna"
+          />
+        </div>
+        <div id="initiator" class="initiator">
+          <img
+            id="kayo"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/kayo.png"
+            alt="Kay-O"
+          />
+          <img
+            id="fade"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/fade.png"
+            alt="Fade"
+          />
+          <img
+            id="skye"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/skye.png"
+            alt="Skye"
+          />
+          <img
+            id="sova"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/sova.png"
+            alt="Sova"
+          />
+          <img
+            id="breach"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/breach.png"
+            alt="Breach"
+          />
+        </div>
+        <div id="controller" class="controller">
+          <img
+            id="omen"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/omen.png"
+            alt="Omen"
+          />
+          <img
+            id="astra"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/astra.png"
+            alt="Astra"
+          />
+          <img
+            id="brimstone"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/brimstone.png"
+            alt="Brimstone"
+          />
+          <img
+            id="viper"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/viper.png"
+            alt="Viper"
+          />
+        </div>
+        <div id="controller" class="controller">
+          <img
+            id="sage"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/sage.png"
+            alt="Sage"
+          />
+          <img
+            id="cypher"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/cypher.png"
+            alt="Cypher"
+          />
+          <img
+            id="chamber"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/chamber.png"
+            alt="Chamber"
+          />
+          <img
+            id="killjoy"
+            class="agents"
+            src="https://www.vlr.gg/img/vlr/game/agents/killjoy.png"
+            alt="Killjoy"
+          />
+        </div>
+      </div>
+    </section>
+
+    <button id="clear-button" class="clear-button">clear</button>
+    <section id="player-row" class="player-row">
+      <article id="player-container" class="player-container">
+        <div id="img-container" class="img-container"></div>
+        <div id="players" class="players">
+          <table id="player-table" class="player-table"></table>
+        </div>
+      </article>
+    </section>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="module" src="../server/functions/eventHandlers.js"></script>
+  </body>
+</html>
