@@ -6,17 +6,50 @@ import {
   rowGeneratorFunction,
   agentPlayersRowGeneratorFunction,
   playerRowGeneratorFunction,
+  teamPlayerListGeneratorFunction,
   htmlRemover,
 } from "./generators/generatorFunctions.js";
 
+/// buttons ///
 const playerGetForm = document.getElementById("get-player-form");
 const playerGetInput = document.getElementById("get-player-input");
 const getPlayerID = document.getElementById("players");
 const getTable = document.getElementById("player-table");
 const getImgContainer = document.getElementById("img-container");
+const getPlayerH2 = document.getElementById("player-h2");
+
+///
+
+const teamIconDropDownHandler = () => {
+  document.onclick = (e) => {
+    let teamName = String(e.target.id);
+    const getPlayerListContainer = document.getElementById("activeCells");
+    if (getPlayerListContainer) {
+      getPlayerListContainer.remove();
+    } else if (e.target.classList.contains("team-icons")) {
+      axios
+        .get(`http://localhost:4000/api/getteam/${teamName}/`)
+        .then((res) => {
+          teamPlayerListGeneratorFunction(
+            res.data,
+            teamName,
+            getTable,
+            getPlayerID,
+            playerImages
+          );
+        });
+    }
+  };
+};
+
+Array.from(document.getElementsByClassName("team-icon-container")).forEach(
+  (el) => {
+    el.addEventListener("click", teamIconDropDownHandler);
+  }
+);
 
 const iconClickHandler = () => {
-  htmlRemover(getTable, getImgContainer);
+  htmlRemover(getTable, getImgContainer, getPlayerH2);
 
   document.onclick = (e) => {
     let agentName = String(e.target.id);
@@ -39,13 +72,14 @@ const iconClickHandler = () => {
 };
 
 const requestPlayer = (body) => {
-  htmlRemover(getTable, getImgContainer);
+  htmlRemover(getTable, getImgContainer, getPlayerH2);
   let { name } = body;
 
   console.log(name);
   axios.get(`http://localhost:4000/api/getplayer/${name}/`).then((res) => {
     let h2 = document.createElement("h2");
     h2.textContent = res.data.IGN;
+    h2.setAttribute("id", "player-h2");
     getPlayerID.appendChild(h2);
 
     playerImgGeneratorFunction(playerImages(name));

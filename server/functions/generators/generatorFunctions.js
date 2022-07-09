@@ -1,18 +1,78 @@
 import { Rainbow } from "./rainbow.js";
 
-export const htmlRemover = (a, b) => {
+export const htmlRemover = (a, b, c) => {
   if (a) {
     a.innerHTML = "";
   }
   if (b) {
     b.innerHTML = "";
   }
-  //   if (c) {
-  //     c.innerHTML = "";
-  //   }
-  //   if (d) {
-  //     d.innerHTML = "";
-  //   }
+  if (c) {
+    c.innerHTML = "";
+  }
+};
+
+export const teamPlayerListGeneratorFunction = (
+  resdata,
+  teamName,
+  getTable,
+  getPlayerID,
+  playerImgFn
+) => {
+  let div = document.createElement("div");
+  div.setAttribute("id", "activeCells");
+  let table = document.createElement("table");
+  let playerName = document.createElement("th");
+  playerName.textContent = "Player";
+  playerName.setAttribute("style", "text-align:center");
+  document
+    .getElementById(`${teamName}-container`)
+    .appendChild(div)
+    .appendChild(table)
+    .appendChild(playerName);
+
+  resdata.forEach((el) => {
+    let playerRow = document.createElement("tr");
+    Object.assign(playerRow, {
+      id: "player-line",
+      style: "width: 100%",
+    });
+    let newPlayerName = document.createElement("td");
+    newPlayerName.setAttribute("style", "text-align:center");
+    newPlayerName.textContent = el.IGN;
+    let getNewPlayerName = newPlayerName.textContent.toLowerCase();
+
+    document
+      .getElementById(`${teamName}-container`)
+      .appendChild(div)
+      .appendChild(table)
+      .appendChild(playerRow)
+      .appendChild(newPlayerName);
+
+    newPlayerName.onclick = () => {
+      axios
+        .get(`http://localhost:4000/api/getplayer/${getNewPlayerName}/`)
+        .then((res) => {
+          let h2 = document.createElement("h2");
+          h2.textContent = res.data.IGN;
+          h2.setAttribute("id", "player-h2");
+          getPlayerID.appendChild(h2);
+
+          playerImgGeneratorFunction(playerImgFn(getNewPlayerName));
+
+          let tableHeaderRow = document.createElement("tr");
+          tableHeaderRow.setAttribute("id", "table-header-containers");
+          getTable.appendChild(tableHeaderRow);
+          rowGeneratorFunction(
+            tableHeaderRow,
+            playerImgGeneratorFunction,
+            null
+          );
+
+          playerRowGeneratorFunction(getTable, res.data);
+        });
+    };
+  });
 };
 
 export const agentImgGeneratorFunction = (image) => {
@@ -68,15 +128,19 @@ export const agentPlayersRowGeneratorFunction = (table, element) => {
     id: "player-line",
     style: "width: 100%",
   });
-  let newPlayerIGL = document.createElement("td");
-  newPlayerIGL.textContent = "In Game Leader";
+
   let newPlayerName = document.createElement("td");
+  newPlayerName.setAttribute("style", "text-align:center");
   newPlayerName.textContent = element.IGN;
+
   let newPlayerACS = document.createElement("td");
+  newPlayerACS.setAttribute("style", "text-align:center");
   newPlayerACS.textContent = element.ACS;
   let newPlayerKDR = document.createElement("td");
+  newPlayerKDR.setAttribute("style", "text-align:center");
   newPlayerKDR.textContent = element.KDR;
   let newPlayerKAST = document.createElement("td");
+  newPlayerKAST.setAttribute("style", "text-align:center");
   newPlayerKAST.textContent = element.KAST;
   let newPlayerRole = document.createElement("td");
   newPlayerRole.textContent = element.Role;
@@ -97,20 +161,26 @@ export const playerRowGeneratorFunction = (table, element) => {
     style: "width: 100%",
   });
   let newPlayerIGL = document.createElement("td");
+  newPlayerIGL.setAttribute("style", "text-align:center");
   if (element.IGL) {
     newPlayerIGL.textContent = String.fromCharCode(10003);
   } else {
     newPlayerIGL.textContent = String.fromCharCode(10005);
   }
   let newPlayerName = document.createElement("td");
+  newPlayerName.setAttribute("style", "text-align:center");
   newPlayerName.textContent = element.IGN;
   let newPlayerACS = document.createElement("td");
+  newPlayerACS.setAttribute("style", "text-align:center");
   newPlayerACS.textContent = element.ACS;
   let newPlayerKDR = document.createElement("td");
+  newPlayerKDR.setAttribute("style", "text-align:center");
   newPlayerKDR.textContent = element.KDR;
   let newPlayerKAST = document.createElement("td");
+  newPlayerKAST.setAttribute("style", "text-align:center");
   newPlayerKAST.textContent = element.KAST;
   let newPlayerRole = document.createElement("td");
+  newPlayerRole.setAttribute("style", "text-align:center");
   newPlayerRole.textContent = element.Role;
 
   table.appendChild(playerRow).appendChild(newPlayerIGL);

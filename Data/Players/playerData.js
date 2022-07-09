@@ -4,7 +4,7 @@ import { ange1, ardiis, shao, zyppan, suygetsu } from "../Teams/fpxData ";
 import { koldamenta, sayf, russ, leo, trexx } from "../Teams/guildData";
 import { klaus, keznit, nagz, mazino, delz1k } from "../Teams/kruData";
 import { adverso, kingg, tacolilla, shyy, melser } from "../Teams/leviatanData";
-import { saadhakk, sacy, aspas, pancada, less } from "../Teams/loudData";
+import { saadhak, sacy, aspas, pancada, less } from "../Teams/loudData";
 import {
   joxjo,
   xnfri,
@@ -54,7 +54,7 @@ export const players = {
   tacolilla: tacolilla,
   shyy: shyy,
   melser: melser,
-  saadhakk: saadhakk,
+  saadhak: saadhak,
   sacy: sacy,
   aspas: aspas,
   pancada: pancada,

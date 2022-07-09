@@ -1,6 +1,6 @@
-export const saadhakk = {
+export const saadhak = {
   IGL: true,
-  IGN: "Saadhakk",
+  IGN: "Saadhak",
   ACS: 225.1,
   KDR: 1.27,
   KAST: "76%",

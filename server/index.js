@@ -1,4 +1,8 @@
-import { populateAgent, populatePlayer } from "./functions/controller.js";
+import {
+  populateAgent,
+  populatePlayer,
+  populateTeam,
+} from "./functions/controller.js";
 
 import express from "express";
 import cors from "cors";
@@ -16,3 +20,5 @@ app.get("/", (req, res) => {
 app.get("/api/getagent/:agent", populateAgent);
 
 app.get("/api/getplayer/:player", populatePlayer);
+
+app.get("/api/getteam/:team", populateTeam);

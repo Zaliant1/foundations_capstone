@@ -4,7 +4,7 @@ import { ange1, ardiis, shao, zyppan, suygetsu } from "../Teams/fpxData ";
 import { koldamenta, sayf, russ, leo, trexx } from "../Teams/guildData";
 import { klaus, keznit, nagz, mazino, delz1k } from "../Teams/kruData";
 import { adverso, kingg, tacolilla, shyy, melser } from "../Teams/leviatanData";
-import { saadhakk, sacy, aspas, pancada, less } from "../Teams/loudData";
+import { saadhak, sacy, aspas, pancada, less } from "../Teams/loudData";
 import {
   joxjo,
   xnfri,
@@ -76,7 +76,7 @@ export const agents = {
     d4v41,
     kingg,
     mazino,
-    saadhakk,
+    saadhak,
     ardiis,
     rb,
     crashies,
@@ -95,7 +95,7 @@ export const agents = {
     jinggg,
     derialy,
     mazino,
-    saadhakk,
+    saadhak,
     foxz,
     mistic,
     shao,
@@ -197,7 +197,7 @@ export const agents = {
     crashies,
   ],
   skye: [
-    saadhakk,
+    saadhak,
     mazino,
     foxz,
     shyy,
@@ -235,7 +235,7 @@ export const agents = {
     sacy,
     benkai,
     joxjo,
-    saadhakk,
+    saadhak,
     klaus,
     fns,
     mistic,
