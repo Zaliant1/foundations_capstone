@@ -15,9 +15,7 @@ app.use(cors());
 
 app.listen(port, () => console.log(`up on ${port}`));
 
-app.get("/", (req, res) => {
-  res.status(200).send();
-});
+app.get("/", express.static("public"));
 
 app.get("/api/getagent/:agent", populateAgent);
 
