@@ -82,6 +82,13 @@ tr {
     width: 34%;
 }
 
+.team-icons:hover {
+  border-radius: 50%;
+  -webkit-box-shadow:0px 0px 41px 12px rgba(255,46,98,0.87);
+  -moz-box-shadow: 0px 0px 41px 12px rgba(255,46,98,0.87);
+  box-shadow: 0px 0px 41px 12px rgba(255,46,98,0.87);
+}
+
 .agents:hover {
   -webkit-box-shadow:0px 0px 41px 12px rgba(255,46,98,0.87);
   -moz-box-shadow: 0px 0px 41px 12px rgba(255,46,98,0.87);
@@ -91,6 +98,24 @@ tr {
 .controller {
   margin: auto;
   width: 80%;
+}
+.watchlist-holder {
+  justify-items: auto;
+  margin: auto;
+  width: 50%;
+ padding-top: 10px;
+}
+
+
+
+.watchlist-button-holder {
+  margin: auto;
+  width: 30%;
+
+  padding: 10px;
+  display: grid;
+  column-gap: 3px;
+  grid-template-columns: auto auto;
 }
 
 .icon-holder {

@@ -2,6 +2,8 @@ import {
   populateAgent,
   populatePlayer,
   populateTeam,
+  populateWatchlist,
+  getWatchlist,
 } from "./functions/controller.js";
 
 import express from "express";
@@ -20,5 +22,9 @@ app.get("/", (req, res) => {
 app.get("/api/getagent/:agent", populateAgent);
 
 app.get("/api/getplayer/:player", populatePlayer);
+
+app.post("/api/getwatchlist/:player", populateWatchlist);
+
+app.get("/api/getwatchlisttocompare/", getWatchlist);
 
 app.get("/api/getteam/:team", populateTeam);
