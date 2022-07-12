@@ -16,7 +16,7 @@ app.use(cors());
 
 app.listen(port, () => console.log(`up on ${port}`));
 app.use(express.static(path.join(__dirname, "../public")));
-app.use(express.static(path.join(__dirname, "server")));
+app.use(express.static(path.join(__dirname, "../server")));
 
 app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "../public/index.html"))
