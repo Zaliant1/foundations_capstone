@@ -95,32 +95,26 @@ export const teamPlayerListGeneratorFunction = (
       .appendChild(newPlayerName);
 
     newPlayerName.onclick = () => {
-      axios
-        .get(`http://localhost:4000/api/getplayer/${getNewPlayerName}/`)
-        .then((res) => {
-          htmlRemover(getTable, getImgContainer);
-          if (document.getElementById("player-h2"))
-            document.getElementById("player-h2").remove();
+      axios.get(`/api/getplayer/${getNewPlayerName}/`).then((res) => {
+        htmlRemover(getTable, getImgContainer);
+        if (document.getElementById("player-h2"))
+          document.getElementById("player-h2").remove();
 
-          let h2 = document.createElement("h2");
-          h2.textContent = res.data.IGN;
-          h2.setAttribute("id", "player-h2");
+        let h2 = document.createElement("h2");
+        h2.textContent = res.data.IGN;
+        h2.setAttribute("id", "player-h2");
 
-          getPlayerID.appendChild(h2);
+        getPlayerID.appendChild(h2);
 
-          playerImgGeneratorFunction(playerImgFn(getNewPlayerName));
+        playerImgGeneratorFunction(playerImgFn(getNewPlayerName));
 
-          let tableHeaderRow = document.createElement("tr");
-          tableHeaderRow.setAttribute("id", "table-header-containers");
-          getTable.appendChild(tableHeaderRow);
-          rowGeneratorFunction(
-            tableHeaderRow,
-            playerImgGeneratorFunction,
-            null
-          );
+        let tableHeaderRow = document.createElement("tr");
+        tableHeaderRow.setAttribute("id", "table-header-containers");
+        getTable.appendChild(tableHeaderRow);
+        rowGeneratorFunction(tableHeaderRow, playerImgGeneratorFunction, null);
 
-          playerRowGeneratorFunction(getTable, res.data);
-        });
+        playerRowGeneratorFunction(getTable, res.data);
+      });
     };
   });
 };
