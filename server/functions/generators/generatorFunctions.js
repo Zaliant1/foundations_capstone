@@ -40,6 +40,10 @@ export const playerWatchlistGeneratorFunction = (
     id: "player-image",
     style: "width: 7% ; border-radius: 50%",
   });
+  playerImg.setAttribute(
+    "onerror",
+    "this.src = 'https://assets.valorantesports.com/val/vct-logo.21d0c9ddeb.svg';"
+  );
 
   let removeButton = document.createElement("button");
   removeButton.textContent = "remove";
@@ -135,8 +139,13 @@ export const playerImgGeneratorFunction = (image) => {
   Object.assign(img, {
     src: `${image}`,
     id: "player-image",
-    style: "border-radius: 50%",
+    style: "border-radius: 50%; width: 240px",
   });
+  img.setAttribute(
+    "onerror",
+    "this.src = 'https://assets.valorantesports.com/val/vct-logo.21d0c9ddeb.svg';"
+  );
+
   document.getElementById("img-container").appendChild(img);
 };
 
@@ -180,7 +189,7 @@ export const rowGeneratorFunction = (
   }
 };
 
-export const agentPlayersRowGeneratorFunction = (table, element, style) => {
+export const agentPlayersRowGeneratorFunction = (table, element) => {
   let playerRow = document.createElement("tr");
   Object.assign(playerRow, {
     id: "player-line",
@@ -209,11 +218,7 @@ export const agentPlayersRowGeneratorFunction = (table, element, style) => {
   table.appendChild(playerRow).appendChild(newPlayerKAST);
   table.appendChild(playerRow).appendChild(newPlayerRole);
 
-  if (style === "universal" || style === null) {
-    rowStyling(newPlayerACS, newPlayerKDR, newPlayerKAST);
-  } else if (style === "local") {
-    tableRowCompareStyle(newPlayerACS, newPlayerKDR, newPlayerKAST);
-  }
+  rowStyling(newPlayerACS, newPlayerKDR, newPlayerKAST);
 };
 
 export const watchlistCompareRowGeneratorFunction = (table, element) => {
@@ -256,7 +261,7 @@ export const watchlistCompareRowGeneratorFunction = (table, element) => {
   rowStyling(newPlayerACS, newPlayerKDR, newPlayerKAST);
 };
 
-export const playerRowGeneratorFunction = (table, element, style) => {
+export const playerRowGeneratorFunction = (table, element) => {
   let playerRow = document.createElement("tr");
   Object.assign(playerRow, {
     id: "player-line",
@@ -291,13 +296,7 @@ export const playerRowGeneratorFunction = (table, element, style) => {
   table.appendChild(playerRow).appendChild(newPlayerKAST);
   table.appendChild(playerRow).appendChild(newPlayerRole);
 
-  if (style === "universal" || style === undefined) {
-    console.log("switching");
-    rowStyling(newPlayerACS, newPlayerKDR, newPlayerKAST);
-  } else if (style === "local") {
-    console.log("switching");
-    tableRowCompareStyle(newPlayerACS, newPlayerKDR, newPlayerKAST);
-  }
+  rowStyling(newPlayerACS, newPlayerKDR, newPlayerKAST);
 };
 
 let arrACS = [];
@@ -313,68 +312,6 @@ export const rowStyling = (tableRow2, tableRow3, tableRow4) => {
   tableRow2Style(tableRow2);
   tableRow3Style(tableRow3);
   tableRow4Style(tableRow4);
-};
-
-const tableRowCompareStyle = (tableRowACS, tableRowKDR, tableRowKAST) => {
-  let averageACS = (
-    arrACS.reduce((acc, val) => {
-      return acc + val;
-    }, 0) / arrACS.length
-  ).toFixed(2);
-
-  let averageKDR = (
-    arrKDR.reduce((acc, val) => {
-      return acc + val;
-    }, 0) / arrKDR.length
-  ).toFixed(2);
-
-  let toNumKAST = [];
-
-  arrKAST.forEach((el) => {
-    let numEl = el.replace("%", "");
-    toNumKAST.push(+numEl);
-  });
-
-  let averageKAST = (
-    toNumKAST.reduce((acc, val) => {
-      return acc + val;
-    }, 0) / toNumKAST.length
-  ).toFixed(2);
-
-  let smallestACS = Math.min(...arrACS.sort((a, b) => a - b));
-  let smallestKDR = Math.min(...arrKDR.sort((a, b) => a - b));
-  let smallestKAST = Math.min(...toNumKAST.sort((a, b) => a - b));
-
-  let biggestACS = Math.max(...arrACS.sort((a, b) => a - b));
-  let biggestKDR = Math.max(...arrKDR.sort((a, b) => a - b));
-  let biggestKAST = Math.max(...toNumKAST.sort((a, b) => a - b));
-  console.log(...arrACS.sort((a, b) => a - b));
-  console.log(...arrKDR.sort((a, b) => a - b));
-  console.log(...toNumKAST.sort((a, b) => a - b));
-
-  const rainbowTableACS = new Rainbow();
-  rainbowTableACS.setNumberRange(
-    Math.trunc(smallestACS),
-    averageACS,
-    Math.trunc(biggestACS)
-  );
-  rainbowTableACS.setSpectrum("e06666", "ffd966", "93c47d");
-  let hexColor = rainbowTableACS.colourAt(tableRowACS.textContent);
-  tableRowACS.setAttribute("style", `background-color: #${hexColor}`);
-
-  const rainbowTableKDR = new Rainbow();
-  rainbowTableKDR.setNumberRange(smallestKDR, averageKDR, biggestKDR);
-  rainbowTableKDR.setSpectrum("e06666", "ffd966", "93c47d");
-  let hexColor2 = rainbowTableKDR.colourAt(tableRowKDR.textContent);
-  tableRowKDR.setAttribute("style", `background-color: #${hexColor2}`);
-
-  const rainbowTableKAST = new Rainbow();
-  rainbowTableKAST.setNumberRange(smallestKAST, averageKAST, biggestKAST);
-  rainbowTableKAST.setSpectrum("e06666", "ffd966", "93c47d");
-  let hexColor3 = rainbowTableKAST.colourAt(
-    tableRowKAST.textContent.replace("%", "")
-  );
-  tableRowKAST.setAttribute("style", `background-color: #${hexColor3}`);
 };
 
 const tableRow2Style = (tableRow) => {

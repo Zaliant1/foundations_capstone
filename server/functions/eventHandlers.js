@@ -23,22 +23,6 @@ const getImgContainer = document.getElementById("img-container");
 const getPlayerH2 = document.getElementById("player-h2");
 const getWatchlist = document.getElementById("watchlist");
 
-// let style = "universal";
-// document
-//   .getElementById("watchlist-compare-style")
-//   .addEventListener("click", () => {
-//     console.log(style);
-//     if (style === "local") {
-//       style = "universal";
-//       document.getElementById("watchlist-compare-style").textContent =
-//         "compare vs everyone";
-//     } else if (style === "universal") {
-//       style = "local";
-//       document.getElementById("watchlist-compare-style").textContent =
-//         "compare vs on-screen";
-//     }
-//   });
-
 const watchlistCompare = () => {
   htmlRemover(getTable, getImgContainer, getPlayerH2);
   let tableHeaderRow = document.createElement("tr");
@@ -74,7 +58,9 @@ const playerWatchlist = () => {
     playerWatchlistSet(playerName).forEach((el) => {
       playerWatchlistGeneratorFunction(getWatchlist, el, playerImages);
       axios.post(`http://localhost:4000/api/getwatchlist/${el}`).then((res) => {
-        console.log(res.data.IGN);
+        htmlRemover(getTable, getImgContainer, getPlayerH2);
+        if (document.getElementById("player-h2"))
+          document.getElementById("player-h2").remove();
       });
     });
   }
@@ -85,6 +71,8 @@ document
   .addEventListener("click", playerWatchlist);
 
 const teamIconDropDownHandler = () => {
+  htmlRemover(getTable, getImgContainer, getPlayerH2);
+
   document.onclick = (e) => {
     let teamName = String(e.target.id);
     const getPlayerListContainer = document.getElementById("activeCells");
@@ -129,7 +117,7 @@ const iconClickHandler = () => {
           agentImgGeneratorFunction(agentImages(agentName));
           rowGeneratorFunction(tableHeaderRow, null, agentImgGeneratorFunction);
           res.data.forEach((el) => {
-            agentPlayersRowGeneratorFunction(getTable, el, style);
+            agentPlayersRowGeneratorFunction(getTable, el);
           });
         });
     }
