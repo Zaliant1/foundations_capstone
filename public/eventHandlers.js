@@ -30,9 +30,9 @@ const watchlistCompare = () => {
   getTable.appendChild(tableHeaderRow);
   rowGeneratorFunction(tableHeaderRow, null, null, "compare");
 
-  axios.get(`http://localhost:4000/api/getwatchlisttocompare`).then((res) => {
+  axios.get(`/api/getwatchlisttocompare`).then((res) => {
     res.data.forEach((el) => {
-      axios.get(`http://localhost:4000/api/getplayer/${el}/`).then((res) => {
+      axios.get(`/api/getplayer/${el}/`).then((res) => {
         rangeFinders(res.data);
         watchlistCompareRowGeneratorFunction(getTable, res.data);
       });
@@ -57,7 +57,7 @@ const playerWatchlist = () => {
   if (document.getElementById("player-h2")) {
     playerWatchlistSet(playerName).forEach((el) => {
       playerWatchlistGeneratorFunction(getWatchlist, el, playerImages);
-      axios.post(`http://localhost:4000/api/getwatchlist/${el}`).then((res) => {
+      axios.post(`/api/getwatchlist/${el}`).then((res) => {
         htmlRemover(getTable, getImgContainer, getPlayerH2);
         if (document.getElementById("player-h2"))
           document.getElementById("player-h2").remove();
@@ -79,18 +79,16 @@ const teamIconDropDownHandler = () => {
     if (getPlayerListContainer) {
       getPlayerListContainer.remove();
     } else if (e.target.classList.contains("team-icons")) {
-      axios
-        .get(`http://localhost:4000/api/getteam/${teamName}/`)
-        .then((res) => {
-          teamPlayerListGeneratorFunction(
-            res.data,
-            teamName,
-            getTable,
-            getPlayerID,
-            playerImages,
-            getImgContainer
-          );
-        });
+      axios.get(`/api/getteam/${teamName}/`).then((res) => {
+        teamPlayerListGeneratorFunction(
+          res.data,
+          teamName,
+          getTable,
+          getPlayerID,
+          playerImages,
+          getImgContainer
+        );
+      });
     }
   };
 };
@@ -108,18 +106,16 @@ const iconClickHandler = () => {
     let agentName = String(e.target.id);
 
     if (e.target.classList.contains("agents")) {
-      axios
-        .get(`http://localhost:4000/api/getagent/${agentName}/`)
-        .then((res) => {
-          let tableHeaderRow = document.createElement("tr");
-          tableHeaderRow.setAttribute("id", "table-header-containers");
-          getTable.appendChild(tableHeaderRow);
-          agentImgGeneratorFunction(agentImages(agentName));
-          rowGeneratorFunction(tableHeaderRow, null, agentImgGeneratorFunction);
-          res.data.forEach((el) => {
-            agentPlayersRowGeneratorFunction(getTable, el);
-          });
+      axios.get(`/api/getagent/${agentName}/`).then((res) => {
+        let tableHeaderRow = document.createElement("tr");
+        tableHeaderRow.setAttribute("id", "table-header-containers");
+        getTable.appendChild(tableHeaderRow);
+        agentImgGeneratorFunction(agentImages(agentName));
+        rowGeneratorFunction(tableHeaderRow, null, agentImgGeneratorFunction);
+        res.data.forEach((el) => {
+          agentPlayersRowGeneratorFunction(getTable, el);
         });
+      });
     }
   };
 };
@@ -128,7 +124,7 @@ const requestPlayer = (body) => {
   htmlRemover(getTable, getImgContainer, getPlayerH2);
   let { name } = body;
 
-  axios.get(`http://localhost:4000/api/getplayer/${name}/`).then((res) => {
+  axios.get(`/api/getplayer/${name}/`).then((res) => {
     let h2 = document.createElement("h2");
     h2.textContent = res.data.IGN;
     h2.setAttribute("id", "player-h2");
