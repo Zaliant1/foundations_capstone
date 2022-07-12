@@ -9,11 +9,11 @@ import {
 import express from "express";
 import cors from "cors";
 const app = express();
-
+const port = process.env.PORT | 4000;
 app.use(express.json());
 app.use(cors());
 
-app.listen(process.env.PORT | 4000, () => console.log("up on 4000"));
+app.listen(port, () => console.log(`up on ${port}`));
 
 app.get("/", (req, res) => {
   res.status(200).send();
