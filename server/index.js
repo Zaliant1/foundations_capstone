@@ -15,7 +15,7 @@ app.use(cors());
 
 app.listen(port, () => console.log(`up on ${port}`));
 
-app.get("/", express.static("public"));
+app.get("/", express.static(path.join(__dirname, "../public")));
 
 app.get("/api/getagent/:agent", populateAgent);
 
